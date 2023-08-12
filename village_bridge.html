@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+	background-image: url("village_bridge.png");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;	
+}
+</style>
+</head>
+<h1 style="color:White; font-family: Arial">Village Bridge</h1><br></br>
+
+<body>
+
+<button id="start" onclick="start()" type="button">Enter</button>
+<button hidden id="acoustic" onclick="a()" type="button">Enable acoustic guitar (Aickman)</button><br></br>
+<button hidden id="beatbox" onclick="b()" type="button">Enable beatboxing (Russo)</button><br></br>
+<button hidden id="grassflute" onclick="g()" type="button">Enable grass flute (Derleth)</button><br></br>
+<button hidden id="vocals" onclick="v()" type="button">Enable vocals (Koontz)</button><br></br>
+<img hidden id="aickman" src="aickman.gif" style="width:64px;height:64px" title="How about this? This sound! Doesn't it get to your heart? Your mind?">
+<img hidden id="russo" src="russo.gif" style="width:64px;height:64px" title="La la la la la...">
+<img hidden id="derleth" src="derleth.gif" style="width:64px;height:64px" title="Fweet fweet... Fweeeeeet fweet fweet...">
+<img hidden id="koontz" src="koontz.gif" style="width:64px;height:64px" title="Singing gives life to my spirit. Will you listen to the voice of my spirit?">
+
+<audio id="0000" loop>
+    <source src="village_bridge_0000.wav" type="audio/wav">
+</audio>
+<audio id="0001" loop>
+    <source src="village_bridge_0001.wav" type="audio/wav">
+</audio>
+<audio id="0010" loop>
+    <source src="village_bridge_0010.wav" type="audio/wav">
+</audio>
+<audio id="0011" loop>
+    <source src="village_bridge_0011.wav" type="audio/wav">
+</audio>
+<audio id="0100" loop>
+    <source src="village_bridge_0100.wav" type="audio/wav">
+</audio>
+<audio id="0101" loop>
+    <source src="village_bridge_0101.wav" type="audio/wav">
+</audio>
+<audio id="0110" loop>
+    <source src="village_bridge_0110.wav" type="audio/wav">
+</audio>
+<audio id="0111" loop>
+    <source src="village_bridge_0111.wav" type="audio/wav">
+</audio>
+<audio id="1000" loop>
+    <source src="village_bridge_1000.wav" type="audio/wav">
+</audio>
+<audio id="1001" loop>
+    <source src="village_bridge_1001.wav" type="audio/wav">
+</audio>
+<audio id="1010" loop>
+    <source src="village_bridge_1010.wav" type="audio/wav">
+</audio>
+<audio id="1011" loop>
+    <source src="village_bridge_1011.wav" type="audio/wav">
+</audio>
+<audio id="1100" loop>
+    <source src="village_bridge_1100.wav" type="audio/wav">
+</audio>
+<audio id="1101" loop>
+    <source src="village_bridge_1101.wav" type="audio/wav">
+</audio>
+<audio id="1110" loop>
+    <source src="village_bridge_1110.wav" type="audio/wav">
+</audio>
+<audio id="1111" loop>
+    <source src="village_bridge_1111.wav" type="audio/wav">
+</audio>
+
+<script>
+var acoustic = "0";
+var beatbox = "0";
+var grassflute = "0";
+var vocals = "0";
+var version = "0000"
+versions = ["0000", "0001", "0010", "0011", "0100", "0101", "0110", "0111", "1000", "1001", "1010", "1011", "1100", "1101", "1110", "1111"];
+const startbtn = document.getElementById("start");
+const acousticbtn = document.getElementById("acoustic");
+const beatboxbtn = document.getElementById("beatbox");
+const grassflutebtn = document.getElementById("grassflute");
+const vocalsbtn = document.getElementById("vocals");
+const aickman = document.getElementById("aickman");
+const russo = document.getElementById("russo");
+const derleth = document.getElementById("derleth");
+const koontz = document.getElementById("koontz");
+
+function start() {
+	for (let i in versions){
+		document.getElementById(versions[i]).play();
+		if (versions[i] != version) {
+			document.getElementById(versions[i]).volume = 0
+		}
+	}
+	startbtn.style.display = "none";
+	acousticbtn.style.display = "inline";
+	beatboxbtn.style.display = "inline";
+	grassflutebtn.style.display = "inline";
+	vocalsbtn.style.display = "inline";
+}
+
+function a() {
+	if (acoustic == "0") {
+		acoustic = "1";
+		acousticbtn.innerText = "Disable acoustic guitar (Aickman)"
+		aickman.style.display = "inline";
+	} else {
+		acoustic = "0";
+		acousticbtn.innerText = "Enable acoustic guitar (Aickman)"
+		aickman.style.display = "none";
+	}
+	update()
+}
+
+function b() {
+	if (beatbox == "0") {
+		beatbox = "1";
+		beatboxbtn.innerText = "Disable beatboxing (Russo)"
+		russo.style.display = "inline";
+	} else {
+		beatbox = "0";
+		beatboxbtn.innerText = "Enable beatboxing (Russo)"
+		russo.style.display = "none";
+	}
+	update()
+}
+
+function g() {
+	if (grassflute == "0") {
+		grassflute = "1";
+		grassflutebtn.innerText = "Disable grass flute (Derleth)"
+		derleth.style.display = "inline";
+	} else {
+		grassflute = "0";
+		grassflutebtn.innerText = "Enable grass flute (Derleth)"
+		derleth.style.display = "none";
+	}
+	update()
+}
+
+function v() {
+	if (vocals == "0") {
+		vocals = "1";
+		vocalsbtn.innerText = "Disable vocals (Koontz)"
+		koontz.style.display = "inline";
+	} else {
+		vocals = "0";
+		vocalsbtn.innerText = "Enable vocals (Koontz)"
+		koontz.style.display = "none";
+	}
+	update()
+}
+
+function update() {
+	version = acoustic.concat(beatbox).concat(grassflute).concat(vocals);
+	for (let i in versions) {
+		if (versions[i] == version) {
+			document.getElementById(versions[i]).volume = 1
+		} else {
+			document.getElementById(versions[i]).volume = 0
+		}
+	}
+} 
+</script>
+
+
+</body>
+</html>
+
